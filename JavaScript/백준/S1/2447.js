@@ -9,7 +9,24 @@ for (let i = 0; i < n; i++) {
   arr.push(new Array(n).fill(" "));
 }
 
-while (idx > 1) {
-  for (let i = 0; i < n; i = i * idx) {}
-  idx /= 3;
+function drawingStar(n, x, y) {
+  if (n > 3) {
+    drawingStar(n / 3, x, y);
+  } else {
+    if (n === 1) return;
+    if (x >= n) {
+      drawingStar(n, 0, y + 3);
+    } else {
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (i === 1 && j === 1) continue;
+          arr[i][j] = "*";
+        }
+      }
+      drawingStar(n, x + 3, y);
+    }
+  }
 }
+
+drawingStar(n, 0, 0);
+console.log(arr);
